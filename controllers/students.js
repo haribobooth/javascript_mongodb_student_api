@@ -21,8 +21,11 @@ studentRouter.get('/:id', function(req, res){
 
 studentRouter.post('/', function(req, res){
   var newStudent = new Student(req.body);
-  students.push(newStudent);
-  res.json(students);
+  query.addStudent(newStudent, function(results){
+    res.json(results);
+  });
+  // students.push(newStudent);
+  // res.json(students);
 });
 
 module.exports = studentRouter;

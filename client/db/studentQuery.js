@@ -15,7 +15,18 @@ StudentQuery.prototype = {
       }
     })
   },
-  
+
+  addStudent: function(newStudent, callback){
+    MongoClient.connect(this.url, function(err, db){
+      if(db){
+        var collection = db.collection('students');
+        collection.insert(newStudent);
+        collection.find().toArray(function(err, docs){
+          callback(docs);
+        });
+      }
+    })
+  },
 }
 
 module.exports = StudentQuery;
