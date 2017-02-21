@@ -25,7 +25,26 @@ StudentQuery.prototype = {
           callback(docs);
         });
       }
-    })
+    });
+  },
+
+  updateStudent: function(updatedDetails, index, callback){
+    MongoClient.connect(this.url, function(err, db){
+      if(db){
+        var collection = db.collection('students');
+        collection.find().toArray(function(err, docs){
+          var studentToBeUpdated = docs[index];
+          var updatedStudent = studentToBeUpdated;
+
+          for(var detail in updatedDetails){
+            updatedStudent[detail] = updatedDetails[detail];
+          }
+
+          collection.update(studentToBeUpdated, updatedStudent);
+          callback(docs);
+        });
+      }
+    });
   },
 }
 

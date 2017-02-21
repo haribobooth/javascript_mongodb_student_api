@@ -15,7 +15,6 @@ studentRouter.get('/:id', function(req, res){
   query.all(function(results){
     res.json(results[req.params.id]);
   });
-  // res.json(students[req.params.id]);
 });
 
 studentRouter.post('/', function(req, res){
@@ -23,8 +22,13 @@ studentRouter.post('/', function(req, res){
   query.addStudent(newStudent, function(results){
     res.json(results);
   });
-  // students.push(newStudent);
-  // res.json(students);
+});
+
+studentRouter.put('/:id', function(req, res){
+  var updatedDetails = req.body;
+  query.updateStudent(updatedDetails, req.params.id, function(results){
+    res.json(results);
+  });
 });
 
 module.exports = studentRouter;
