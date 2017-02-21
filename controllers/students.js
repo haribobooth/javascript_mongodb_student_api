@@ -1,6 +1,5 @@
 var express = require('express');
 var studentRouter = express.Router();
-var students = require('../client/src/models/students')();
 var Student = require('../client/src/models/student');
 var StudentQuery = require('../client/db/studentQuery');
 var query = new StudentQuery();

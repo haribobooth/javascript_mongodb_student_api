@@ -68,8 +68,99 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var UI = __webpack_require__(1);
+
+var app = function() {
+  new UI();
+}
+
+window.onload = app;
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var StudentDataRequester = __webpack_require__(3)
+
+var UI = function(){
+  var studentDataRequester = new StudentDataRequester();
+  studentDataRequester.all(function(results){
+    this.render(results);
+  }.bind(this));
+}
+
+UI.prototype = {
+  createText: function(text, label){
+    var p = document.createElement('p');
+    p.innerText = label + ": " + text;
+    return p;
+  },
+
+  appendText: function(element, text, label){
+    var pTag = this.createText(text, label);
+    element.appendChild(pTag);
+  },
+
+  render: function(students){
+    var container = document.querySelector('#students');
+    students.forEach(function(student){
+      var li = document.createElement('li');
+      this.appendText(li, student.name, "Name");
+      this.appendText(li, student.favouriteLanguage, "Favourite Language");
+      container.appendChild(li);
+    }.bind(this));
+  },
+}
+
+module.exports = UI;
+
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports) {
 
+var Student = function(options){
+  this.name = options.name;
+  this.favouriteLanguage = options.favouriteLanguage;
+}
+
+module.exports = Student;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+ var Student = __webpack_require__(2);
+
+var StudentDataRequester = function(){
+
+};
+
+StudentDataRequester.prototype = {
+  makeGetRequest: function(url, callback){
+    var request = new XMLHttpRequest();
+    request.open('GET', url);
+    request.onload = callback;
+    request.send();
+  },
+
+  all: function(callback){
+    var url = 'http://localhost:3000/api/students';
+    this.makeGetRequest(url, function(){
+      if(this.status !== 200) return;
+      var jsonString = this.responseText;
+      var result = JSON.parse(jsonString);
+
+      callback(result);
+    })
+  }
+}
+
+module.exports = StudentDataRequester;
 
 
 /***/ })
