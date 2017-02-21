@@ -46,6 +46,20 @@ StudentQuery.prototype = {
       }
     });
   },
+
+  deleteStudent: function(index, callback){
+    MongoClient.connect(this.url, function(err, db){
+      if(db){
+        var collection = db.collection('students');
+        collection.find().toArray(function(err, docs){
+          var studentToBeDeleted = docs[index];
+
+          collection.remove(studentToBeDeleted);
+          callback(docs);
+        });
+      }
+    });
+  }
 }
 
 module.exports = StudentQuery;

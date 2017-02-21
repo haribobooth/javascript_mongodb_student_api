@@ -31,4 +31,10 @@ studentRouter.put('/:id', function(req, res){
   });
 });
 
+studentRouter.delete('/:id', function(req, res){
+  query.deleteStudent(req.params.id, function(results){
+    res.json(results);
+  })
+});
+
 module.exports = studentRouter;
