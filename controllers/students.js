@@ -13,7 +13,10 @@ studentRouter.get('/', function(req, res){
 });
 
 studentRouter.get('/:id', function(req, res){
-  res.json(students[req.params.id]);
+  query.all(function(results){
+    res.json(results[req.params.id]);
+  });
+  // res.json(students[req.params.id]);
 });
 
 studentRouter.post('/', function(req, res){

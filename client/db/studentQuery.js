@@ -13,8 +13,9 @@ StudentQuery.prototype = {
           callback(docs);
         });
       }
-    });
-  }
+    })
+  },
+  
 }
 
 module.exports = StudentQuery;
