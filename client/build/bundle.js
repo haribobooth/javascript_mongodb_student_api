@@ -63,27 +63,14 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var UI = __webpack_require__(1);
-
-var app = function() {
-  new UI();
-}
-
-window.onload = app;
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var StudentDataRequester = __webpack_require__(3)
+var StudentDataRequester = __webpack_require__(2)
 
 var UI = function(){
   var studentDataRequester = new StudentDataRequester();
@@ -119,7 +106,7 @@ module.exports = UI;
 
 
 /***/ }),
-/* 2 */
+/* 1 */
 /***/ (function(module, exports) {
 
 var Student = function(options){
@@ -131,10 +118,10 @@ module.exports = Student;
 
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
- var Student = __webpack_require__(2);
+ var Student = __webpack_require__(1);
 
 var StudentDataRequester = function(){
 
@@ -161,6 +148,19 @@ StudentDataRequester.prototype = {
 }
 
 module.exports = StudentDataRequester;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var UI = __webpack_require__(0);
+
+var app = function() {
+  new UI();
+}
+
+window.onload = app;
 
 
 /***/ })
